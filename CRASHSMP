@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrashSMP Store</title>
+    <!-- Use Tailwind CSS for a sleek, responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load a futuristic font style -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Share+Tech+Mono&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #d1d5db;
+            overflow-x: hidden;
+        }
+        /* Animated background for a futuristic grid effect */
+        .animated-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: move-grid 20s linear infinite;
+            z-index: -1;
+        }
+        @keyframes move-grid {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 50px 50px;
+            }
+        }
+        .glow-on-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7;
+        }
+        .glow-on-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 30px #a855f7;
+        }
+        /* Style for the active tab */
+        .tab.active {
+            background-color: #2d2d2d;
+            color: #a855f7;
+            border-bottom-color: #a855f7;
+            box-shadow: inset 0 -3px 0 #a855f7;
+        }
+        /* Pulsing animation for the Discord button */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        .animate-pulse-effect {
+            animation: pulse 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-300">
+
+    <!-- Animated Background -->
+    <div class="animated-background"></div>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm shadow-lg border-b border-purple-500">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold font-mono text-purple-400">CrashSMP <span class="text-white">Store</span></a>
+            <div class="space-x-6 hidden md:flex">
+                <button class="tab-button text-gray-400 hover:text-purple-400 transition-colors duration-300 focus:outline-none" data-tab="ranks">Ranks</button>
+                <button class="tab-button text-gray-400 hover:text-purple-400 transition-colors duration-300 focus:outline-none" data-tab="crates">Crates</button>
+                <a href="#discord" class="text-gray-400 hover:text-purple-400 transition-colors duration-300">Discord</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-400 hover:text-purple-400 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-90 py-2">
+            <button class="tab-button block px-4 py-2 text-gray-400 hover:bg-gray-800" data-tab="ranks">Ranks</button>
+            <button class="tab-button block px-4 py-2 text-gray-400 hover:bg-gray-800" data-tab="crates">Crates</button>
+            <a href="#discord" class="block px-4 py-2 text-gray-400 hover:bg-gray-800">Discord</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="bg-black rounded-lg text-white text-center py-16 md:py-24 mb-8">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg text-purple-400">CRASHSMP STORE</h1>
+        </section>
+
+        <!-- Tab Controls -->
+        <div class="flex justify-center md:space-x-4 mb-8 border-b border-gray-700">
+            <button class="tab-button px-6 py-3 font-semibold text-xl text-gray-400 hover:text-white transition-colors duration-300 active" data-tab="ranks">Server Ranks</button>
+            <button class="tab-button px-6 py-3 font-semibold text-xl text-gray-400 hover:text-white transition-colors duration-300" data-tab="crates">Loot Crates</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tab-content" class="min-h-[500px]">
+            <!-- Ranks Section -->
+            <div id="ranks" class="tab-panel grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">KING</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Receive a custom chat tag and join an exclusive supporters channel on Discord.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$4.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="KING">Buy</button>
+                </div>
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">DONO</h3>
+                    <p class="text-gray-400 mb-4 text-sm">A foundational supporter. Gain a unique color-coded name in chat.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$9.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="DONO">Buy</button>
+                </div>
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">ONGG</h3>
+                    <p class="text-gray-400 mb-4 text-sm">A title that recognizes your early support. Includes a rare, exclusive chat icon.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$3.00</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="ONGG">Buy</button>
+                </div>
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">BEST RANK LOL</h3>
+                    <p class="text-gray-400 mb-4 text-sm">The absolute top-tier of supporters. Your name is a beacon for all to see.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$24.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="BEST RANK LOL">Buy</button>
+                </div>
+            </div>
+
+            <!-- Crates Section (hidden by default) -->
+            <div id="crates" class="tab-panel hidden grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Crate: OP Crate -->
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">OP Crate</h3>
+                    <p class="text-gray-400 mb-4 text-sm">This crate contains a powerful, over-powered item to give you an edge in the game.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$5.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="OP Crate">Buy</button>
+                </div>
+                <!-- Crate: Most OP Crate -->
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">Most OP Crate</h3>
+                    <p class="text-gray-400 mb-4 text-sm">The ultimate crate for the most powerful gear. Contains an extremely rare and valuable item.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$5.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="Most OP Crate">Buy</button>
+                </div>
+                <!-- Crate: Crash crate -->
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">Crash Crate</h3>
+                    <p class="text-gray-400 mb-4 text-sm">A standard module with a random selection of cosmetic armor pieces, titles, or pets.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$14.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="Crash Crate">Buy</button>
+                </div>
+                <!-- Crate: Aura Crate -->
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">Aura Crate</h3>
+                    <p class="text-gray-400 mb-4 text-sm">A highly sought-after crate containing a unique, glowing aura effect to show off your style.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$5.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="Aura Crate">Buy</button>
+                </div>
+                <!-- Crate: KOTH Crate -->
+                <div class="bg-gray-800 rounded-xl border border-purple-600 shadow-lg p-6 text-center glow-on-hover">
+                    <h3 class="text-2xl font-semibold mb-2 text-purple-400">KOTH Crate</h3>
+                    <p class="text-gray-400 mb-4 text-sm">A special King of the Hill exclusive crate. Contains a rare block texture pack or an exclusive pet.</p>
+                    <div class="text-3xl font-bold text-white mb-6">$9.99</div>
+                    <button class="purchase-button w-full bg-purple-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300" data-item="KOTH Crate">Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Discord Section -->
+        <section id="discord" class="bg-black text-white text-center py-24 md:py-32 rounded-lg my-8">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-400">System Assistance Required</h2>
+            <p class="text-lg md:text-xl font-light max-w-2xl mx-auto mb-8">
+                For technical support and community communication, connect to the official Discord channel.
+            </p>
+            <a href="https://discord.gg/NBcBMZk4Gy" target="_blank" class="inline-block bg-purple-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 duration-300 animate-pulse-effect">Join Discord Now</a>
+        </section>
+    </main>
+
+    <!-- Purchase Modal - Step 1: Username Input -->
+    <div id="username-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-8 rounded-lg border border-purple-600 w-11/12 md:w-1/3 text-center shadow-lg">
+            <h2 id="modal-title" class="text-2xl font-semibold text-purple-400 mb-4">Purchase Item</h2>
+            <p class="text-gray-300 mb-4">Please enter your Minecraft username to continue.</p>
+            <form id="purchase-form" class="space-y-4">
+                <input type="text" id="username-input" name="username" placeholder="Your Minecraft Username" class="w-full px-4 py-2 bg-gray-700 text-white rounded-lg border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                <div class="flex justify-center space-x-4">
+                    <button type="submit" id="submit-button" class="bg-purple-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-purple-700 transition-colors duration-300">Submit</button>
+                    <button type="button" id="close-username-modal-button" class="bg-gray-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-gray-700 transition-colors duration-300">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Purchase Modal - Step 2: Payment Options -->
+    <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-gray-800 p-8 rounded-lg border border-purple-600 w-11/12 md:w-1/3 text-center shadow-lg">
+            <h2 class="text-2xl font-semibold text-purple-400 mb-4">Complete Your Purchase</h2>
+            <p class="text-gray-300 mb-6">Choose your preferred payment method below.</p>
+            <div class="space-y-6">
+                <!-- CashApp Option -->
+                <div class="bg-gray-700 p-4 rounded-lg flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://placehold.co/40x40/6a0dad/fff?text=CA" alt="CashApp Logo" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-bold text-lg text-white">CashApp</p>
+                            <p id="cashapp-id" class="text-sm text-gray-400">$jujuvr1006</p>
+                        </div>
+                    </div>
+                    <a href="https://cash.app/$jujuvr1006" target="_blank" class="bg-purple-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-purple-700 transition-colors duration-300">Pay Now</a>
+                </div>
+                <!-- PayPal Option -->
+                <div class="bg-gray-700 p-4 rounded-lg flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://placehold.co/40x40/6a0dad/fff?text=PP" alt="PayPal Logo" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-bold text-lg text-white">PayPal</p>
+                            <p class="text-sm text-gray-400">COMING SOON</p>
+                        </div>
+                    </div>
+                    <button class="bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg cursor-not-allowed" disabled>Coming Soon</button>
+                </div>
+            </div>
+            <button id="close-payment-modal-button" class="mt-6 bg-gray-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-gray-700 transition-colors duration-300">Close</button>
+        </div>
+    </div>
+
+    <!-- Message Box -->
+    <div id="message-box" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-gray-800 p-4 rounded-lg border border-purple-600 shadow-lg text-center text-white hidden">
+        <p id="message-text"></p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-500 py-8 text-center border-t border-purple-700">
+        <div class="container mx-auto px-4">
+            <p>&copy; CrashSMP. All systems reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for tab switching, mobile menu, and modals -->
+    <script>
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabPanels = document.querySelectorAll('.tab-panel');
+
+        function showTab(tabId) {
+            tabPanels.forEach(panel => {
+                panel.classList.add('hidden');
+                panel.classList.remove('grid');
+            });
+
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            const activePanel = document.getElementById(tabId);
+            activePanel.classList.remove('hidden');
+            activePanel.classList.add('grid');
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+        }
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                showTab(button.dataset.tab);
+            });
+        });
+
+        // Show the first tab by default on page load
+        showTab('ranks');
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Modal functionality
+        const usernameModal = document.getElementById('username-modal');
+        const paymentModal = document.getElementById('payment-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const purchaseButtons = document.querySelectorAll('.purchase-button');
+        const closeUsernameModalButton = document.getElementById('close-username-modal-button');
+        const closePaymentModalButton = document.getElementById('close-payment-modal-button');
+        const purchaseForm = document.getElementById('purchase-form');
+        const submitButton = document.getElementById('submit-button');
+        
+
+        purchaseButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const itemName = button.dataset.item;
+                modalTitle.textContent = `Purchase ${itemName}`;
+                usernameModal.classList.remove('hidden');
+            });
+        });
+
+        closeUsernameModalButton.addEventListener('click', () => {
+            usernameModal.classList.add('hidden');
+        });
+
+        closePaymentModalButton.addEventListener('click', () => {
+            paymentModal.classList.add('hidden');
+        });
+
+        purchaseForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username-input').value;
+            
+            // Show a temporary loading state
+            submitButton.textContent = 'Processing...';
+            submitButton.disabled = true;
+
+            setTimeout(() => {
+                // In a real application, you would send this data to a server for processing
+                usernameModal.classList.add('hidden');
+                document.getElementById('username-input').value = '';
+                submitButton.textContent = 'Submit';
+                submitButton.disabled = false;
+                
+                // Show the payment modal
+                paymentModal.classList.remove('hidden');
+            }, 1000); // Simulate a network request delay
+        });
+        
+    </script>
+</body>
+</html>
